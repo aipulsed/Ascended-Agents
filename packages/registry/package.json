@@ -1,8 +1,8 @@
 {
-  "name": "@ascended-agents/agents",
+  "name": "@ascended-agents/registry",
   "version": "1.0.0",
   "type": "module",
-  "description": "Production-ready agent definitions for Ascended-Agents",
+  "description": "Agent registry for Ascended-Agents \u2014 register, retrieve and discover agents",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@ascended-agents/core": "workspace:*",
+    "@ascended-agents/schemas": "workspace:*",
     "zod": "^3.22.0"
   },
   "devDependencies": {

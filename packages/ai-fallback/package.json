@@ -1,8 +1,8 @@
 {
-  "name": "@ascended-agents/agents",
+  "name": "@ascended-agents/ai-fallback",
   "version": "1.0.0",
   "type": "module",
-  "description": "Production-ready agent definitions for Ascended-Agents",
+  "description": "AI fallback stubs for Ascended-Agents \u2014 defers to external LLM when deterministic pipelines fail",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -19,8 +19,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@ascended-agents/core": "workspace:*",
-    "zod": "^3.22.0"
+    "@ascended-agents/core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

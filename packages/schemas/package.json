@@ -1,8 +1,8 @@
 {
-  "name": "@ascended-agents/agents",
+  "name": "@ascended-agents/schemas",
   "version": "1.0.0",
   "type": "module",
-  "description": "Production-ready agent definitions for Ascended-Agents",
+  "description": "Centralised Zod schemas for Ascended-Agents",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,7 +15,7 @@
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "clean": "rm -rf dist"
   },
   "dependencies": {

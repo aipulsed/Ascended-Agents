@@ -1,0 +1,22 @@
+{
+  "name": "@ascended-agents/example-ascendstack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example: integrating Ascended-Agents into an AscendStack application",
+  "scripts": {
+    "dev": "tsx src/runAgentsExample.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@ascended-agents/agents": "workspace:*",
+    "@ascended-agents/core": "workspace:*",
+    "@ascended-agents/registry": "workspace:*",
+    "@ascended-agents/runner": "workspace:*",
+    "@ascended-agents/sdk-adapter": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

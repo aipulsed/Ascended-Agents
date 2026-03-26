@@ -1,0 +1,42 @@
+{
+  "name": "@ascended-agents/runner",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Agent runner \u2014 resolves, validates, and produces execution plans for Ascended-Agents",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "ascended-agents": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./cli": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/cli/index.ts --format esm,cjs --dts --clean",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist",
+    "agent:create": "tsx src/cli/create.ts",
+    "agent:validate": "tsx src/cli/validate.ts",
+    "agent:compile": "tsx src/cli/compile.ts"
+  },
+  "dependencies": {
+    "@ascended-agents/ai-fallback": "workspace:*",
+    "@ascended-agents/core": "workspace:*",
+    "@ascended-agents/event-bus": "workspace:*",
+    "@ascended-agents/registry": "workspace:*",
+    "@ascended-agents/validator": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0",
+    "zod": "^3.22.0"
+  }
+}

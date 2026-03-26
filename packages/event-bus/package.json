@@ -1,8 +1,8 @@
 {
-  "name": "@ascended-agents/agents",
+  "name": "@ascended-agents/event-bus",
   "version": "1.0.0",
   "type": "module",
-  "description": "Production-ready agent definitions for Ascended-Agents",
+  "description": "Agent lifecycle event adapter \u2014 thin bridge from Ascended-Agents to @ascendstack/ascended-event-bus. Hosts inject the real bus at runtime; no direct npm dependency required.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -19,8 +19,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@ascended-agents/core": "workspace:*",
-    "zod": "^3.22.0"
+    "@ascended-agents/core": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

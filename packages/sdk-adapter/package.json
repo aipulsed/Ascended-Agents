@@ -1,8 +1,8 @@
 {
-  "name": "@ascended-agents/agents",
+  "name": "@ascended-agents/sdk-adapter",
   "version": "1.0.0",
   "type": "module",
-  "description": "Production-ready agent definitions for Ascended-Agents",
+  "description": "Integration adapter between Ascended-Agents and the Ascended-SDK",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -15,11 +15,12 @@
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "@ascended-agents/core": "workspace:*",
+    "@ascended-agents/registry": "workspace:*",
     "zod": "^3.22.0"
   },
   "devDependencies": {

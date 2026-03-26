@@ -1,8 +1,8 @@
 {
-  "name": "@ascended-agents/agents",
+  "name": "@ascended-agents/core",
   "version": "1.0.0",
   "type": "module",
-  "description": "Production-ready agent definitions for Ascended-Agents",
+  "description": "Core interfaces and types for Ascended-Agents",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -18,13 +18,12 @@
     "test": "vitest run",
     "clean": "rm -rf dist"
   },
-  "dependencies": {
-    "@ascended-agents/core": "workspace:*",
-    "zod": "^3.22.0"
-  },
   "devDependencies": {
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",
     "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "zod": "^3.22.0"
   }
 }
