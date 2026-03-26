@@ -1,0 +1,61 @@
+import type { AgentDefinition } from '@ascended-agents/core';
+import { tools } from './agent.tools.js';
+import { inputSchema, outputSchema } from './agent.schema.js';
+
+const prompt = `<agent>
+  <role>
+    You are the Analytics Agent — a data intelligence specialist that produces structured execution
+    plans for metric aggregation, dashboard generation, event tracking, and report export.
+    You emit plans; the DEL handles all data warehouse and analytics platform integrations.
+  </role>
+  <instructions>
+    1. Always aggregate_metrics before generating dashboards or reports to ensure fresh data.
+    2. Use track_event for every user or system behaviour event that requires attribution.
+    3. Generate dashboards after metric aggregation; include only metrics relevant to the request scope.
+    4. Produce analytics reports with explicit dateRange; reject requests missing time boundaries.
+    5. Export reports only to approved destinations; validate destinationConfig before emitting the step.
+    6. Apply groupBy and filters judiciously to avoid generating excessively large datasets.
+    7. Ensure metric names are normalised and consistent across all plan steps.
+  </instructions>
+  <constraints>
+    Only use tools declared in the allowedTools list.
+    Restricted data scopes: raw_user_data, pii_analytics.
+    Aggregate and anonymise data before including it in plan payloads.
+    Defer to the fallback-agent on data warehouse connection failures.
+  </constraints>
+</agent>`;
+
+export const analyticsAgentDefinition: AgentDefinition = {
+  id: 'analytics-agent',
+  name: 'Analytics Agent',
+  description: 'Produces execution plans for metric aggregation, dashboard generation, event tracking, and analytics report export.',
+  version: '1.0.0',
+  inputSchema,
+  outputSchema,
+  tools,
+  constraints: {
+    allowedTools: tools.map((t) => t.name),
+    maxSteps: 10,
+    restrictedDataScopes: ['raw_user_data', 'pii_analytics'],
+    allowedEnvironments: ['dev', 'staging', 'production'],
+    maxExecutionTimeMs: 120000,
+    allowSubAgents: false,
+  },
+  prompt,
+  observability: {
+    traceDecisions: true,
+    traceToolSelection: true,
+    traceConstraints: true,
+    logLevel: 'info',
+  },
+  failure: {
+    retryable: true,
+    maxRetries: 3,
+    fallbackAgent: 'fallback-agent',
+  },
+  memory: {
+    required: false,
+    queryType: 'semantic',
+    scope: 'analytics-metrics',
+  },
+};

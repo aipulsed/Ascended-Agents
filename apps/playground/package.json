@@ -1,0 +1,26 @@
+{
+  "name": "@ascended-agents/playground",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Development playground for Ascended-Agents \u2014 test definitions, validate plans, simulate integrations",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@ascended-agents/agents": "workspace:*",
+    "@ascended-agents/core": "workspace:*",
+    "@ascended-agents/registry": "workspace:*",
+    "@ascended-agents/runner": "workspace:*",
+    "@ascended-agents/testing": "workspace:*",
+    "@ascended-agents/validator": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}

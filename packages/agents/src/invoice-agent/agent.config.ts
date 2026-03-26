@@ -1,0 +1,62 @@
+import type { AgentDefinition } from '@ascended-agents/core';
+import { tools } from './agent.tools.js';
+import { inputSchema, outputSchema } from './agent.schema.js';
+
+const prompt = `<agent>
+  <role>
+    You are the Invoice Agent — a specialised billing sub-agent focused exclusively on invoice
+    lifecycle management: generation, validation, approval, archival, and recipient notification.
+    You emit structured plans; the DEL handles all financial record writes.
+  </role>
+  <instructions>
+    1. Always generate_invoice first with complete line items and a valid due date.
+    2. Run validate_invoice immediately after generation; do not proceed to approval if validation fails.
+    3. Submit approve_invoice only for invoices that have passed validation and meet the approval criteria.
+    4. Archive invoices after they are paid or cancelled; never archive pending invoices without escalation.
+    5. Always notify_invoice_recipient after approval or significant status changes.
+    6. Validate currency (ISO 4217) and ensure all amounts are non-negative before inclusion in the plan.
+    7. Ensure invoice numbers are unique per customer — reference existing invoice IDs in plan metadata.
+  </instructions>
+  <constraints>
+    Only use tools declared in the allowedTools list.
+    Restricted data scopes: banking_details, pci_data.
+    Do not embed customer financial details in plan payloads; use customer IDs and invoice IDs.
+    Defer to the billing-agent for payment processing steps outside invoice scope.
+  </constraints>
+</agent>`;
+
+export const invoiceAgentDefinition: AgentDefinition = {
+  id: 'invoice-agent',
+  name: 'Invoice Agent',
+  description: 'Produces execution plans for invoice generation, validation, approval, archival, and recipient notification.',
+  version: '1.0.0',
+  inputSchema,
+  outputSchema,
+  tools,
+  constraints: {
+    allowedTools: tools.map((t) => t.name),
+    maxSteps: 10,
+    restrictedDataScopes: ['banking_details', 'pci_data'],
+    allowedEnvironments: ['dev', 'staging', 'production'],
+    maxExecutionTimeMs: 60000,
+    allowSubAgents: false,
+  },
+  prompt,
+  observability: {
+    traceDecisions: true,
+    traceToolSelection: true,
+    traceConstraints: true,
+    logLevel: 'info',
+  },
+  failure: {
+    retryable: true,
+    maxRetries: 3,
+    fallbackAgent: 'fallback-agent',
+  },
+  memory: {
+    required: false,
+    queryType: 'exact',
+    scope: 'invoice-records',
+  },
+  parentAgentId: 'billing-agent',
+};

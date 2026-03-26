@@ -1,0 +1,29 @@
+{
+  "name": "@ascended-agents/event-bus",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Agent lifecycle event adapter \u2014 thin bridge from Ascended-Agents to @ascendstack/ascended-event-bus. Hosts inject the real bus at runtime; no direct npm dependency required.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@ascended-agents/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0"
+  }
+}

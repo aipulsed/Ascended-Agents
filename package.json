@@ -1,0 +1,31 @@
+{
+  "name": "ascended-agents",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deterministic agent definition framework for the AscendStack ecosystem",
+  "scripts": {
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "agent:create": "tsx packages/runner/src/cli/create.ts",
+    "agent:validate": "tsx packages/runner/src/cli/validate.ts",
+    "agent:compile": "tsx packages/runner/src/cli/compile.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "turbo": "^2.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.9"
+}
